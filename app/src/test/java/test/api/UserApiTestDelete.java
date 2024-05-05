@@ -9,9 +9,9 @@ public class UserApiTestDelete {
     
     private static final String VALID_APP_ID = "662701ba776fafe3d71e1751";
     
-    private static final String VALID_USER_ID = "6636e5a1906c3af5c8c6b363";
+    private static final String VALID_USER_ID = "6637437e906c3a14e4c6d66e";
     
-    private static final String INVALID_USER_ID = "6636e5a1906c3af5c8c6b364";
+    private static final String INVALID_USER_ID = "6637437e906c3a14e4c6d66d";
     
     private static final String INVALID_FORMAT_USER_ID = "APAJAWE1";
     
