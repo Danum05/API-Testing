@@ -120,7 +120,7 @@ API-Testing/
 ```
 
 
- `.gradle/`: Direktori ini berisi file-file cache dan metadata yang digunakan oleh Gradle selama proses build.
+1. `.gradle/`: Direktori ini berisi file-file cache dan metadata yang digunakan oleh Gradle selama proses build.
 2. `.vscode/`: Direktori ini berisi konfigurasi spesifik untuk lingkungan pengembangan Visual Studio Code (VSCode).
 3. `app/`:
    - `build/`:
