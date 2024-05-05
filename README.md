@@ -54,81 +54,136 @@ tasks.named('test') {
 # Struture Project Test
 Tujuan project adalah proses pengujian automation web dan api, sehingga kode program tersimpan dalam package test. Adapun struktur package sbb:
 ```
-test-api/
+API-Testing/
 ├── .gradle/
 ├── .vscode/
 ├── app/
 │   ├── build/
-│   │   ├── distributions/
-│   │   ├── libs/
-│   │   ├── reports/
-│   │   │   └── tests/
-│   │   │       ├── css/
-│   │   │       ├── js/
-│   │   │       └── test/
-│   │   │           ├── classes/
-│   │   │           ├── css/
-│   │   │           ├── js/
-│   │   │           ├── packages/
-│   │   │           └── index.html
-│   │   ├── resources/
-│   │   │   ├── main/
-│   │   │   └── test/
-│   │   └── scripts/
-│   │       └── app/
-│   │           └── app.bat
-│   ├── src/
-│   │   ├── main/
+│   │   ├── classes/
 │   │   │   ├── java/
+│   │   │   │   ├── main/
+│   │   │   │   │   └── test/
+│   │   │   │   │       └── api/
+│   │   │   │   │           └── App.class
 │   │   │   │   └── test/
-│   │   │   │       └── api/
-│   │   │   │           └── App.java
-│   │   │   └── resources/
-│   │   └── test/
-│   │       ├── java/
-│   │       │   └── test/
-│   │       │       └── api/
-│   │       │           ├── UserApiTestDelete.java
-│   │       │           └── UserApiTestGet.java
-│   │       └── resources/
+│   │   │   │       └── test/
+│   │   │   │           └── api/
+│   │   │   │               ├── UserApiTestDelete.class
+│   │   │   │               ├── UserApiTestGet.class
+│   │   │   │               ├── UserApiTestPost.class
+│   │   │   │               └── UserApiTestPut.class
+│   │   ├── generated/
+│   │   │   └── sources/
+│   │   │       ├── annotationProcessor/
+│   │   │       │   └── java/
+│   │   │       │       ├── main/
+│   │   │       │       └── test/
+│   │   │       ├── headers/
+│   │   │       │   └── java/
+│   │   │       │       ├── main/
+│   │   │       │       └── test/
+│   │   │       ├── main/
+│   │   │       └── test/
+│   │   ├── resources/
+│   │   └── tmp/
+│   │       ├── compileJava/
+│   │       │   └── previous-compilation-data.bin
+│   │       └── compileTestJava/
+│   │           └── previous-compilation-data.bin
+│   ├── src/
+│   │  ├──── main/
+│   │  │   └── java/
+│   │  │       └── test/
+│   │  │           └── api/
+│   │  │               └── App.java
+│   │  └── test/
+│   │      └── java/
+│   │          └── test/
+│   │              └── api/
+│   │                  ├── UserApiTestDelete.java
+│   │                  ├── UserApiTestGet.java
+│   │                  ├── UserApiTestPost.java
+│   │                  └── UserApiTestPut.java
+│   ├── build.gradle
+├── gradle/
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
 ├── .gitattributes
 ├── .gitignore
-├── README.md
-├── gradle/
 ├── gradlew
 ├── gradlew.bat
-├── settings.gradle
+├── README.md
+└── settings.gradle
+
     
 ```
-.gradle/: Direktori ini berisi file-file yang terkait dengan konfigurasi dan dependensi dari sistem build Gradle. Gradle adalah alat yang sering digunakan dalam pengembangan perangkat lunak Java untuk mengotomatisasi proses build dan manajemen dependensi.
-.vscode/: Direktori ini mungkin berisi konfigurasi proyek yang spesifik untuk pengembangan dengan Visual Studio Code, seperti file pengaturan atau ekstensi yang digunakan.
-app/: Ini adalah direktori utama dari aplikasi. Biasanya, kode aplikasi Java atau Android ditempatkan di sini.
-build/: Direktori ini berisi hasil dari proses build, termasuk file-file yang dihasilkan seperti file distribusi, laporan, dan sumber daya yang telah dikompilasi.
-src/: Ini adalah tempat untuk kode sumber aplikasi.
-main/: Kode sumber utama aplikasi.
-java/: Kode Java untuk aplikasi utama.
-test/: Kode pengujian untuk aplikasi.
-resources/: Sumber daya tambahan yang digunakan oleh aplikasi utama, seperti file konfigurasi atau gambar.
-test/: Kode pengujian untuk aplikasi.
-build.gradle: File konfigurasi Gradle untuk aplikasi. Ini berisi informasi tentang dependensi, pengaturan build, dan tugas-tugas lain yang perlu dilakukan selama proses build.
-.gitattributes: File konfigurasi untuk Git yang menentukan cara Git mengelola berbagai jenis file dalam proyek.
-.gitignore: File yang berisi pola-pola file dan direktori yang ingin diabaikan oleh Git, misalnya file build atau file konfigurasi lokal.
-README.md: Ini adalah file Markdown yang berisi informasi penting tentang proyek, seperti panduan penggunaan, dokumentasi, atau instruksi instalasi.
-gradle/: Direktori yang mungkin berisi skrip atau plugin tambahan untuk Gradle.
-gradlew dan gradlew.bat: Skrip untuk menjalankan Gradle dari baris perintah di lingkungan UNIX dan Windows, secara berturut-turut.
-settings.gradle: File konfigurasi untuk Gradle yang berisi informasi tentang modul-modul yang ada dalam proyek.
+
+
+ `.gradle/`: Direktori ini berisi file-file cache dan metadata yang digunakan oleh Gradle selama proses build.
+2. `.vscode/`: Direktori ini berisi konfigurasi spesifik untuk lingkungan pengembangan Visual Studio Code (VSCode).
+3. `app/`:
+   - `build/`:
+     - `classes/java/`: Direktori ini berisi file-file kelas Java yang telah dikompilasi, baik untuk kode sumber utama (`main/`) maupun kode pengujian (`test/`).
+     - `generated/sources/`: Direktori ini berisi kode sumber yang dihasilkan secara otomatis selama proses build, seperti file-file yang dihasilkan oleh prosesor anotasi (`annotationProcessor/`) dan header (`headers/`).
+     - `resources/`: Direktori ini berisi file-file sumber daya (resources) yang digunakan oleh aplikasi.
+     - `tmp/`: Direktori ini berisi file-file sementara yang digunakan selama proses kompilasi (`compileJava/` dan `compileTestJava/`).
+   - `src/`:
+     - `main/java/test/api/`: Direktori ini berisi kode sumber utama dari aplikasi, terutama kelas `App.java`.
+     - `test/java/test/api/`: Direktori ini berisi kode sumber untuk pengujian aplikasi, seperti kelas-kelas `UserApiTestDelete.java`, `UserApiTestGet.java`, `UserApiTestPost.java`, dan `UserApiTestPut.java`.
+   - `build.gradle`: File konfigurasi Gradle untuk aplikasi, yang berisi informasi tentang dependensi, tugas-tugas build, dan pengaturan lainnya.
+
+
+4. `gradle/wrapper/`:
+   - `gradle-wrapper.jar`: File JAR yang digunakan untuk menjalankan Gradle Wrapper, yang memungkinkan distribusi dan eksekusi Gradle tanpa menginstal Gradle secara lokal.
+   - `gradle-wrapper.properties`: File konfigurasi untuk Gradle Wrapper.
+
+
+5. `.gitattributes`: File konfigurasi untuk Git yang menentukan cara Git mengelola berbagai jenis file dalam repositori.
+
+
+6. `.gitignore`: File yang berisi daftar pola-pola file dan direktori yang akan diabaikan oleh Git, misalnya file-file hasil build atau file-file konfigurasi lokal.
+
+
+7. `gradlew` dan `gradlew.bat`: Skrip untuk menjalankan Gradle dari baris perintah di lingkungan Unix/Linux dan Windows, secara berturut-turut.
+
+
+8. `README.md`: File Markdown yang biasanya berisi informasi penting tentang proyek, seperti deskripsi, instruksi instalasi, dan dokumentasi.
+
+
+9. `settings.gradle`: File konfigurasi Gradle yang berisi informasi tentang modul-modul yang ada dalam proyek.
 
 
 Note.
 1. Setiap kali menjalankan automation testing, akan terbentuk hasil test report yang dapat diakses pada folder test-api\app\build\reports\tests\test\index.html
 
 # Workflow
-Langkah pembuatan test script
-Buat Direktori Test: Pastikan Anda memiliki direktori yang sesuai untuk menyimpan file test. Dalam struktur folder yang Anda berikan, direktori untuk test sudah disediakan di app/src/test/java.
-Buat Kelas Test: Di dalam direktori test tersebut, buat kelas-kelas test untuk menguji kelas-kelas utama Anda. Misalnya, Anda dapat membuat UserApiTestGet.java untuk menguji fitur-fitur pengambilan data dari API dan UserApiTestDelete.java untuk menguji fitur-fitur penghapusan data dari API.
-Gunakan Kerangka Pengujian: Dalam kelas-kelas test yang Anda buat, Anda akan menggunakan kerangka pengujian seperti JUnit. Anda dapat menambahkan anotasi JUnit seperti @Test pada metode-metode yang ingin Anda uji.
-Tulis Test Case: Di dalam metode-metode yang dianotasi sebagai @Test, tulis kode yang menguji fungsionalitas dari kelas atau metode yang Anda inginkan. Anda dapat menggunakan berbagai metode asserst dari JUnit seperti assertEquals atau assertTrue untuk memeriksa apakah perilaku kelas atau metode sesuai dengan yang diharapkan.
-Jalankan Test Case: Setelah Anda menulis test case, Anda dapat menjalankannya dengan menggunakan perintah build Gradle. Biasanya, Anda dapat menjalankan test case dengan menjalankan perintah ./gradlew test dari terminal di direktori proyek Anda. Ini akan menjalankan semua test case yang ditemukan dalam proyek Anda dan memberikan laporan tentang hasilnya.
+Langkah-Langkah Membuat Skrip Tes 
+1. Buat direktori tes.
+Pastikan Anda memiliki direktori yang sesuai untuk menyimpan file pengujian. Struktur folder yang ditentukan menyediakan direktori untuk pengujian di bawah app/src/test/java.
+
+2. Membuat kelas uji.
+Buat kelas tes di direktori tes untuk menguji kelas utama. Pada testing yang kami uji, kami membuat UserApiTestGet.java untuk menguji fungsionalitas pengambilan data API, UserApiTestPut.java untuk menguji fungsionalitas pembaruan data API, UserApiTestPost.java unntuk menguji fungsionalitas penambahan data API, dan UserApiTestDelete.java untuk menguji fungsionalitas penghapusan data  API.
+
+3. Gunakan kerangka pengujian.
+Kelas pengujian yang Anda buat menggunakan kerangka pengujian seperti JUnit. Anda dapat menambahkan anotasi JUnit seperti @Test ke metode yang ingin Anda uji. salah satu contohnya yaitu :
+```
+@Test
+    public void testCase1_03() {
+	. . .
+}
+```
+
+4. Menulis kasus uji.
+Tulis kode dalam metode yang dianotasi sebagai @Test untuk menguji fungsionalitas  kelas atau metode yang diinginkan. Anda dapat menggunakan berbagai metode penegasan JUnit, seperti penegasanEquals dan penegasanTrue, untuk memastikan bahwa kelas atau metode berperilaku seperti yang Anda harapkan.
+
+5. Jalankan kasus uji.
+Setelah membuat kasus uji, Anda dapat menjalankannya  menggunakan perintah build Gradle (./gradlew build/gradle build). Anda biasanya dapat menjalankan kasus pengujian dengan menjalankan perintah ./gradlew test/gradle test dari terminal di dalam direktori proyek Anda. perintah tersebut akan menjalankan semua kasus uji yang ditemukan dalam proyek  dan melaporkan hasilnya.
+ 
+
+
+
+
 
 
 # How to Run Execution Testing
@@ -162,25 +217,108 @@ pengujian API dilakukan dengan menggunakan api management user yang diakses pada
 # Test Case
 Pembuatan test case meliputi test positif dan test negatif, yaitu
 ## Test Case API User Method Post
-    1. Pemeriksaan berhasil melakukan get semua daftar user
-    2. Pemeriksaan berhasil melakukan get profile user by id
-    3. Pemeriksaan gagal get profile user, karena user id tidak ditemukan
-    4. Pemeriksaan berhasil ubah profile user by id
-    5. Pemeriksaan berhasil hapus profile user by id
+1. Operasi tidak punya authorization
+2. field lain terisi, dan field first name di isi huruf dengan panjang antara 2-50
+3. field lain terisi, dan field last name di isi huruf dengan panjang antara 2-50
+4. field lain terisi, dan field title di isi dengan mr
+5. field lain terisi, dan field title di isi dengan ms
+6. field lain terisi, dan field title di isi dengan mrs
+7. field lain terisi, dan field title di isi dengan miss
+8. field lain terisi, dan field title di isi dengan dr
+9. field lain terisi, dan field gander di isi dengan male
+10. field lain terisi, dan field gander di isi dengan female
+11. field lain terisi, dan field email di isi email yang belum terdaftar 
+12. field lain terisi, dan field DateOfBirtth di isi dengan data yang valid
+13. field lain terisi, dan field Phone di isi dengan format +62 
+14. field lain terisi, dan field Phone di isi dengan format 08
+15. field lain terisi, dan field picture di isi data URL valid
+16. field lain terisi, dan field location di isi dengan data valid
+17. user laki-laki, email sudah terdaftar
+18. user perempuan, email sudah terdaftar
+19. field lain terisi, kecuali titlel diisi kosong
+20. field lain terisi, kecuali first name kosong
+21. field lain terisi, kecuali last name kosong
+22. field lain terisi, kecuali gender diisi kosong
+23. field lain terisi, kecuali email diisi kosong
+24. field lain terisi, kecuali dateOfBirth diisi kosong
+25. field lain terisi, kecuali phone diisi kosong
+26. field lain terisi, kecuali picture diisi kosong
+27. field lain terisi, kecuali location diisi kosong
+28. semua field diisi kosong
+29. field lain benar, format first name invalid (first name diisi lebih dari 50 karakter atau dibawah 2 karakter)
+30. field lain benar, format first name invalid (first name diisi angka atau simbol )
+31. field lain benar, format last name invalid (last name diisi lebih dari 50 karakter atau dibawah 2 karakter)
+32. field lain benar, format last name nvalid (first name diisi angka atau simbol )
+33. field lain benar, format email invalid (menggunakan @, tetapi nama sudah terdaftar)
+34. field lain benar, format email invalid (tanpa menggunakan @)
+35. field lain benar, format phone invalid (menggunakan huruf)
+36. field lain benar, format tanggal tidak benar (29/02/2003)
+37. field lain benar namun data gender invalid, yaitu selain "male" dan "female"
+38. field lain benar namun data title invalid, yaitu selain "mr", "ms", "mrs", "miss", "dr"
+39. field lain benar namun data URL tidak valid
+40. field lain benar namun data location tidak valid
+
 ## Test Case API User Method Get
-    1. Operasi tidak punya authorization
-    2. app-id valid, dan user id ada pada sistem
-    3. app-id valid, dan user id tidak ada pada sistem
-    4. app-id valid, dan user id tidak sesuai format
-    5. api-id tidak valid, dan user id ada pada sistem
+1. Operasi tidak punya authorization
+2. app-id valid, dan user id ada pada sistem
+3. app-id valid, dan user id tidak ada pada sistem
+4. app-id valid, dan user id tidak sesuai format
+5. api-id tidak valid, dan user id ada pada sistem
+
 ## Test Case API User Method Put
+1. Pemeriksaan update user tanpa mengatur app-id pada header request
+2. Mengubah beberapa field data user dengan input data yang valid dan id yang terdaftar
+3. Mengubah semua field data user dengan input data yang valid dan id yang terdaftar
+4. Mengubah field "firstName" pada data user dengan input data yang valid dan id yang terdaftar
+5. Mengubah field "lastName" pada data user dengan input data yang valid dan id yang terdaftar
+6. Mengubah isi field "title" dengan "mr"  pada data user dengan input data yang valid dan id yang terdaftar
+7. Mengubah isi field "title" dengan "ms"  pada data user dengan input data yang valid dan id yang terdaftar
+8. Mengubah isi field "title" dengan "mrs"  pada data user dengan input data yang valid dan id yang terdaftar
+9. Mengubah isi field "title" dengan "miss"  pada data user dengan input data yang valid dan id yang terdaftar
+10. Mengubah isi field "title" dengan "dr"  pada data user dengan input data yang valid dan id yang terdaftar
+11. Mengubah isi field "title" dengan ""  pada data user dengan input data yang valid dan id yang terdaftar
+12. Mengubah isi field "gender" dengan "male"  pada data user dengan input data yang valid dan id yang terdaftar
+13. Mengubah isi field "gender" dengan "female"  pada data user dengan input data yang valid dan id yang terdaftar
+14. Mengubah isi field "gender" dengan "other"  pada data user dengan input data yang valid dan id yang terdaftar
+15. Mengubah isi field "gender" dengan ""  pada data user dengan input data yang valid dan id yang terdaftar
+16. Mengubah isi field "email" dengan format email yang valid dan id yang terdaftar
+17. Mengubah isi field "dateOfBirth" dengan format yang valid dan id yang terdaftar
+18. Mengubah isi field "phone" dengan format yang valid dan id yang terdaftar
+19. Mengubah isi field "picture" dengan format yang valid dan id yang terdaftar
+20. melakukan update user dengan mengubah object location  pada sub field street diisi dengan input karakter dalam range yang valid, dengan id yang valid dan terdaftar.
+21. melakukan update user dengan mengubah object location  pada sub field city diisi dengan input karakter dalam range yang valid, dengan id yang valid dan terdaftar.
+22. melakukan update user dengan mengubah object location  pada sub field state diisi dengan input karakter dalam range yang valid, dengan id yang valid dan terdaftar.
+23. melakukan update user dengan mengubah object location  pada sub field country diisi dengan input karakter dalam range yang valid, dengan id yang valid dan terdaftar.
+24. Mengubah field "firstName" pada data user dengan input data bertipe integer dan id yang terdaftar
+25. Mengubah field "lastName" pada data user dengan input data bertipe integer dan id yang terdaftar
+26. Mengubah Field "title" diisi dr dengan tanpa tanda ""
+27. Mengubah Field "gender" diisi male dengan tanpa tanda ""
+28. Mengubah isi field "email" dengan format email yang invalid dan id yang terdaftar
+29. Mengubah Field "dateOfBirthday" dengan format invalid (tidak mengikuti format dd/mm/yyyy)
+30. Mengubah Field "picture" diisi dengan tanpa menggunakan ""
+31. Mengubah Field "street" pada objek "location" diisi dengan tipe data integer
+32. Mengubah Field "city" pada objek "location" diisi dengan tipe data integer
+33. Mengubah Field "state" pada objek "location" diisi dengan tipe data integer
+34. Mengubah Field "country" pada objek "location" diisi dengan tipe data integer
+35. Mengubah isi Field "firstName" dengan input diluar range karakter yang valid
+36. Mengubah isi Field "lastName" dengan input diluar range karakter yang valid
+37. Field "title" diisi string selain ("mr", "ms", "mrs", "miss", "dr", "")
+38. Field "gender" diisi string selain ("male", "female", "other", "")
+39. Field "dateOfBirth" diisi tanggal pada tahun sebelum 1900
+40. Field "dateOfBirth" diisi tanggal setelah hari ini
+41. Field "street" pada objek "location" diisi dengan input diluar range karakter yang valid
+42. Field "city" pada objek "location" diisi dengan input diluar range karakter yang valid
+43. Field "state" pada objek "location" diisi dengan input diluar range karakter yang valid
+44. Field "country" pada objek "location" diisi dengan input diluar range karakter yang valid
+45. semua field diisi benar, parameter tidak terdaftar
 
 ## Test Case API User Method Delete
-    1. Operasi tidak punya authorization
-    2. app-id valid, dan user id ada pada sistem
-    3. app-id valid, dan user id tidak ada pada sistem
-    4. app-id valid, dan user id tidak sesuai format
-    5. api-id tidak valid, dan user id ada pada sistem
+1. Operasi tidak punya authorization
+2. app-id valid, dan user id ada pada sistem
+3. app-id valid, dan user id tidak ada pada sistem
+4. app-id valid, dan user id tidak sesuai format
+5. api-id tidak valid, dan user id ada pada sistem
+
 
 
 
